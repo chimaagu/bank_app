@@ -25,6 +25,14 @@ class SignUpPage extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 30),
+              Text(
+                "Please fill in the fields with the required information",
+                style: GoogleFonts.andika(
+                  fontSize: 12,
+                  fontWeight: FontWeight.w300,
+                ),
+              ),
+              const SizedBox(height: 30),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [

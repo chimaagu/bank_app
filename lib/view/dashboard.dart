@@ -1,3 +1,5 @@
+import 'package:bank_app/view/profile_page.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -23,13 +25,23 @@ class _DashBoardState extends State<DashBoard> {
                   padding: const EdgeInsets.symmetric(horizontal: 20.0),
                   child: Row(
                     children: [
-                      Container(
-                        height: 32,
-                        width: 32,
-                        decoration: const BoxDecoration(
-                          shape: BoxShape.circle,
-                          image: DecorationImage(
-                            image: AssetImage("images/pic.png"),
+                      InkWell(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            CupertinoPageRoute(
+                              builder: (context) => const ProfilePage(),
+                            ),
+                          );
+                        },
+                        child: Container(
+                          height: 32,
+                          width: 32,
+                          decoration: const BoxDecoration(
+                            shape: BoxShape.circle,
+                            image: DecorationImage(
+                              image: AssetImage("images/pic.png"),
+                            ),
                           ),
                         ),
                       ),
@@ -160,16 +172,8 @@ class _DashBoardState extends State<DashBoard> {
                       label: "Transfer",
                     ),
                     QuickActionButton(
-                      label: "Payment",
-                      image: "images/card.png",
-                    ),
-                    QuickActionButton(
-                      label: "Top-up",
+                      label: "Withdraw",
                       image: "images/charge.png",
-                    ),
-                    QuickActionButton(
-                      label: "QR Pay",
-                      image: "images/qrpay.png",
                     ),
                   ],
                 ),
