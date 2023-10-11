@@ -1,3 +1,4 @@
+import 'package:bank_app/view/AuthView/login_page.dart';
 import 'package:bank_app/view/dashboard.dart';
 import 'package:flutter/material.dart';
 
@@ -15,7 +16,7 @@ class MyApp extends StatelessWidget {
         ),
         useMaterial3: true,
       ),
-      home: const DashBoard(),
+      home: const LoginPage(),
     );
   }
 }
