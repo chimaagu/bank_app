@@ -10,10 +10,12 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
+        primaryColor: Colors.blue,
         colorScheme: ColorScheme.fromSeed(
-          seedColor: Colors.deepPurple,
+          seedColor: Colors.blue,
+          primary: Colors.blue,
         ),
-        useMaterial3: true,
+        // useMaterial3: true,
       ),
       home: const LoginPage(),
     );
