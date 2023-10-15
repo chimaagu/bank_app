@@ -1,6 +1,6 @@
 import 'package:bank_app/view/AuthView/login_page.dart';
 import 'package:bank_app/view/AuthView/sign_up_3.dart';
-import 'package:bank_app/view/dashboard.dart';
+import 'package:bank_app/view/Home/dashboard.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -145,9 +145,6 @@ class SignUpPage2 extends StatelessWidget {
                   SizedBox(
                     width: double.infinity,
                     child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color(0xff171717),
-                      ),
                       onPressed: () {
                         Navigator.push(
                           context,
@@ -190,7 +187,7 @@ class SignUpPage2 extends StatelessWidget {
                           text: "Login",
                           style: GoogleFonts.andika(
                             decoration: TextDecoration.underline,
-                            color: Colors.black,
+                            color: Theme.of(context).primaryColor,
                             fontSize: 14,
                           ),
                         ),

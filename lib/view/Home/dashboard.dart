@@ -1,3 +1,4 @@
+import 'package:bank_app/WIdgets/widgets.dart';
 import 'package:bank_app/view/profile_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -11,9 +12,13 @@ class DashBoard extends StatefulWidget {
 }
 
 class _DashBoardState extends State<DashBoard> {
+  final GlobalKey<ScaffoldState> dashBoardKey = GlobalKey();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: dashBoardKey,
+      drawer: DrawerWidget(),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
@@ -24,6 +29,13 @@ class _DashBoardState extends State<DashBoard> {
                 padding: const EdgeInsets.symmetric(horizontal: 20.0),
                 child: Row(
                   children: [
+                    InkWell(
+                      child: const Icon(Icons.menu),
+                      onTap: () {
+                        dashBoardKey.currentState!.openDrawer();
+                      },
+                    ),
+                    const Spacer(),
                     InkWell(
                       onTap: () {
                         Navigator.push(
@@ -44,8 +56,6 @@ class _DashBoardState extends State<DashBoard> {
                         ),
                       ),
                     ),
-                    const Spacer(),
-                    const Icon(Icons.menu),
                   ],
                 ),
               ),
@@ -74,8 +84,9 @@ class _DashBoardState extends State<DashBoard> {
                     begin: Alignment.topLeft,
                     end: Alignment.bottomRight,
                     colors: [
-                      Color(0xff171717),
+                      Colors.blue,
                       Color(0xffF58218),
+                      Colors.blue,
                     ],
                   ),
                 ),
@@ -176,34 +187,25 @@ class _DashBoardState extends State<DashBoard> {
                   ),
                 ],
               ),
+              const SizedBox(height: 10),
+              Container(
+                margin: const EdgeInsets.symmetric(horizontal: 20),
+                height: 43,
+                child: const QuickActionButton(
+                  label: "Make an Enquiry",
+                  image: "",
+                ),
+              ),
               const SizedBox(height: 20),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
-                child: Row(
-                  children: [
-                    Text(
-                      "Latest Transactions",
-                      style: GoogleFonts.andika(
-                        fontSize: 20,
-                        fontWeight: FontWeight.w400,
-                        color: const Color(0xff333A45),
-                      ),
-                    ),
-                    const Spacer(),
-                    const Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Icon(
-                          Icons.arrow_forward_ios_rounded,
-                          size: 15,
-                        ),
-                        Icon(
-                          Icons.arrow_forward_ios_rounded,
-                          size: 15,
-                        ),
-                      ],
-                    )
-                  ],
+                child: Text(
+                  "Bank for a better tommorrow",
+                  style: GoogleFonts.andika(
+                    fontSize: 25,
+                    fontWeight: FontWeight.bold,
+                    color: const Color(0xff333A45),
+                  ),
                 ),
               ),
               const SizedBox(height: 15),
@@ -212,144 +214,92 @@ class _DashBoardState extends State<DashBoard> {
                 controller: ScrollController(),
                 shrinkWrap: true,
                 children: [
-                  transactionCard(
-                    name: "My Wife",
-                    specialist: "Top-up",
-                    image: "images/wife.png",
+                  helpCard(
+                    name: "Fixed Deposit",
+                    subText: "Fixed Returns with Peace of Mind",
                   ),
-                  transactionCard(
-                    name: "Emmanuel Fernandes",
-                    specialist: "Top-up",
-                    image: "images/wife.png",
+                  helpCard(
+                    name: "Current Account",
+                    subText: "Banking Solutions for a Business",
                   ),
-                  transactionCard(
-                    name: "Emma Jets",
-                    specialist: "Payments",
-                    image: "images/wife.png",
-                  ),
-                  transactionCard(
-                    name: "My Wife",
-                    specialist: "Top-up",
-                    image: "images/wife.png",
+                  helpCard(
+                    name: "Mutual Funds",
+                    subText: "Our Strategies for Better Returns",
                   ),
                 ],
-              )
+              ),
             ],
           ),
         ),
       ),
     );
   }
-
-  Widget transactionCard({
-    String? name,
-    String? specialist,
-    String? image,
-    VoidCallback? onTap,
-    BuildContext? ctx,
-  }) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
-      margin: const EdgeInsets.only(bottom: 10.0),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(12),
-        color: Colors.white,
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.shade500,
-            blurRadius: 10,
-          ),
-        ],
-      ),
-      child: InkWell(
-        onTap: onTap,
-        child: Row(
-          children: [
-            GestureDetector(
-              onTap: () {},
-              child: CircleAvatar(
-                radius: 25,
-                backgroundImage: AssetImage(image.toString()),
-                child: image == null
-                    ? const Center(
-                        child: Icon(
-                          Icons.person,
-                          color: Colors.white,
-                        ),
-                      )
-                    : null,
-              ),
-            ),
-            const SizedBox(width: 15),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  name!,
-                  style: GoogleFonts.andika(
-                    fontSize: 13,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-                const SizedBox(height: 3),
-                Text(
-                  specialist!,
-                  style: GoogleFonts.andika(
-                    fontSize: 13,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-                Text(
-                  "Transfer to other accounts",
-                  style: GoogleFonts.andika(
-                    fontSize: 13,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-              ],
-            ),
-            const Spacer(),
-            Text(
-              r"-20, 000$",
-              style: GoogleFonts.andika(
-                fontSize: 13,
-                fontWeight: FontWeight.w500,
-                color: Colors.red,
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
 }
 
-class QuickActionButton extends StatelessWidget {
-  final String label;
-  final String image;
-  const QuickActionButton({
+class DrawerWidget extends StatelessWidget {
+  const DrawerWidget({
     super.key,
-    required this.label,
-    required this.image,
   });
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        color: const Color(0xff282828),
-        borderRadius: BorderRadius.circular(15),
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
+    return Drawer(
+      shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.only(
+        topRight: Radius.circular(20),
+        bottomRight: Radius.circular(20),
+      )),
+      width: 250,
+      child: ListView(
         children: [
-          Image.asset(image),
-          const SizedBox(width: 15),
-          Text(
-            label,
-            style: GoogleFonts.andika(
-              fontSize: 15,
-              color: Colors.white,
+          DrawerHeader(
+            decoration: BoxDecoration(
+              color: Theme.of(context).primaryColor,
+            ),
+            child: Image.asset(
+              "images/logo_drawer.png",
+            ),
+          ),
+          const Divider(color: Colors.blue),
+          const ListTile(
+            title: Text(
+              "Services",
+            ),
+            trailing: Icon(
+              Icons.arrow_forward_ios,
+              size: 15,
+            ),
+          ),
+          const Divider(color: Colors.blue),
+          const ListTile(
+            title: Text(
+              "Apply now",
+              style: TextStyle(),
+            ),
+            trailing: Icon(
+              Icons.arrow_forward_ios,
+              size: 15,
+            ),
+          ),
+          const Divider(color: Colors.blue),
+          const ListTile(
+            title: Text(
+              "Get Intouch",
+            ),
+            trailing: Icon(
+              Icons.arrow_forward_ios,
+              size: 15,
+            ),
+          ),
+          const Divider(color: Colors.blue),
+          const ListTile(
+            title: Text(
+              "Log Out",
+            ),
+            trailing: Icon(
+              Icons.logout_rounded,
+              color: Colors.red,
+              size: 15,
             ),
           ),
         ],
