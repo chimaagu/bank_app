@@ -1,4 +1,4 @@
-import 'package:bank_app/view/AuthView/login_page.dart';
+import 'package:bank_app/Screens/AuthView/login_page.dart';
 import 'package:flutter/material.dart';
 
 class MyApp extends StatelessWidget {
@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
           seedColor: Colors.blue,
           primary: Colors.blue,
         ),
-        // useMaterial3: true,
+        useMaterial3: true,
       ),
       home: const LoginPage(),
     );

@@ -1,5 +1,5 @@
-import 'package:bank_app/view/AuthView/sign_up_1.dart';
-import 'package:bank_app/view/Home/dashboard.dart';
+import 'package:bank_app/Screens/AuthView/sign_up_1.dart';
+import 'package:bank_app/Screens/Home/dashboard.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';

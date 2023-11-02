@@ -1,22 +1,33 @@
+import 'package:bank_app/Styles/colors.dart';
+import 'package:bank_app/Styles/text_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class QuickActionButton extends StatelessWidget {
   final String label;
   final String? image;
+  final VoidCallback? onPressed;
   const QuickActionButton({
     super.key,
     required this.label,
     this.image,
+    this.onPressed,
   });
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
+      onTap: onPressed,
       child: Container(
         decoration: BoxDecoration(
-          color: Colors.blue,
+          color: primaryColor,
           borderRadius: BorderRadius.circular(15),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey.shade500,
+              blurRadius: 10,
+            ),
+          ],
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -25,10 +36,9 @@ class QuickActionButton extends StatelessWidget {
             const SizedBox(width: 15),
             Text(
               label,
-              style: GoogleFonts.andika(
-                fontSize: 15,
-                color: Colors.white,
-              ),
+              style: TextStyles()
+                  .normalTextStyleBold
+                  .copyWith(color: Colors.white),
             ),
           ],
         ),
@@ -65,20 +75,11 @@ Widget helpCard({
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                name!,
-                style: GoogleFonts.andika(
-                  fontSize: 13,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
+              Text(name!, style: TextStyles().normalTextStyleBold),
               const SizedBox(height: 3),
               Text(
                 subText!,
-                style: GoogleFonts.andika(
-                  fontSize: 13,
-                  fontWeight: FontWeight.w500,
-                ),
+                style: TextStyles().normalTextStyle,
               ),
               // Text(
               //   "Transfer to other accounts",

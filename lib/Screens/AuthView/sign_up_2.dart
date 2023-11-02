@@ -1,12 +1,13 @@
-import 'package:bank_app/view/AuthView/login_page.dart';
-import 'package:bank_app/view/AuthView/sign_up_2.dart';
+import 'package:bank_app/Screens/AuthView/login_page.dart';
+import 'package:bank_app/Screens/AuthView/sign_up_3.dart';
+import 'package:bank_app/Screens/Home/dashboard.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class SignUpPage extends StatelessWidget {
-  const SignUpPage({super.key});
+class SignUpPage2 extends StatelessWidget {
+  const SignUpPage2({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +41,7 @@ class SignUpPage extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "Email",
+                        "First Name",
                         style: GoogleFonts.andika(
                           fontSize: 14,
                           fontWeight: FontWeight.bold,
@@ -52,12 +53,12 @@ class SignUpPage extends StatelessWidget {
                           fontWeight: FontWeight.bold,
                         ),
                         decoration: const InputDecoration(
-                          hintText: "example@gmail.com",
+                          hintText: "Jerry",
                         ),
                       ),
                       const SizedBox(height: 30),
                       Text(
-                        "Phone Number",
+                        "Middle Name",
                         style: GoogleFonts.andika(
                           fontSize: 14,
                           fontWeight: FontWeight.bold,
@@ -68,12 +69,11 @@ class SignUpPage extends StatelessWidget {
                           fontSize: 12,
                           fontWeight: FontWeight.bold,
                         ),
-                        decoration:
-                            const InputDecoration(hintText: "phone number"),
+                        decoration: const InputDecoration(hintText: "Smith"),
                       ),
                       const SizedBox(height: 30),
                       Text(
-                        "Zip Code",
+                        "Last Name",
                         style: GoogleFonts.andika(
                           fontSize: 14,
                           fontWeight: FontWeight.bold,
@@ -85,12 +85,12 @@ class SignUpPage extends StatelessWidget {
                           fontWeight: FontWeight.bold,
                         ),
                         decoration: const InputDecoration(
-                          hintText: "zip code / postal code",
+                          hintText: "Bryan",
                         ),
                       ),
                       const SizedBox(height: 30),
                       Text(
-                        "Date of Birth",
+                        "Country",
                         style: GoogleFonts.andika(
                           fontSize: 14,
                           fontWeight: FontWeight.bold,
@@ -149,7 +149,7 @@ class SignUpPage extends StatelessWidget {
                         Navigator.push(
                           context,
                           CupertinoPageRoute(
-                            builder: (context) => const SignUpPage2(),
+                            builder: (context) => const SignUpPage3(),
                           ),
                         );
                       },

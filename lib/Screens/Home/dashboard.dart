@@ -1,5 +1,10 @@
+import 'package:bank_app/Screens/Transfers/out_transfer.dart';
+import 'package:bank_app/Screens/Transfers/transfer_page.dart';
+import 'package:bank_app/Styles/text_styles.dart';
+import 'package:bank_app/Utils/navigator.dart';
+import 'package:bank_app/Utils/pop_button.dart';
 import 'package:bank_app/WIdgets/widgets.dart';
-import 'package:bank_app/view/profile_page.dart';
+import 'package:bank_app/Screens/Home/profile_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -13,12 +18,13 @@ class DashBoard extends StatefulWidget {
 
 class _DashBoardState extends State<DashBoard> {
   final GlobalKey<ScaffoldState> dashBoardKey = GlobalKey();
+  TextStyles textStyles = TextStyles();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       key: dashBoardKey,
-      drawer: DrawerWidget(),
+      drawer: const DrawerWidget(),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
@@ -159,7 +165,7 @@ class _DashBoardState extends State<DashBoard> {
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: Text(
                   "Quick actions",
-                  style: GoogleFonts.andika(
+                  style: GoogleFonts.poppins(
                     fontSize: 20,
                     fontWeight: FontWeight.w500,
                     color: const Color(0xff333A45),
@@ -176,12 +182,15 @@ class _DashBoardState extends State<DashBoard> {
                   mainAxisSpacing: 15,
                   crossAxisSpacing: 30,
                 ),
-                children: const [
+                children: [
                   QuickActionButton(
                     image: "images/arrow.png",
                     label: "Transfer",
+                    onPressed: () {
+                      showTransferDialog();
+                    },
                   ),
-                  QuickActionButton(
+                  const QuickActionButton(
                     label: "Withdraw",
                     image: "images/charge.png",
                   ),
@@ -200,10 +209,10 @@ class _DashBoardState extends State<DashBoard> {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: Text(
-                  "Bank for a better tommorrow",
-                  style: GoogleFonts.andika(
-                    fontSize: 25,
-                    fontWeight: FontWeight.bold,
+                  "Latest Transactions",
+                  style: GoogleFonts.poppins(
+                    fontSize: 15,
+                    fontWeight: FontWeight.w600,
                     color: const Color(0xff333A45),
                   ),
                 ),
@@ -232,6 +241,85 @@ class _DashBoardState extends State<DashBoard> {
           ),
         ),
       ),
+    );
+  }
+
+  showTransferDialog() {
+    showModalBottomSheet(
+      isDismissible: false,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(25),
+          topRight: Radius.circular(25),
+        ),
+      ),
+      context: context,
+      builder: (ctx) {
+        return Container(
+          padding: const EdgeInsets.all(25),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Row(
+                children: [
+                  Text(
+                    "Choose Destination",
+                    style: TextStyles().appBarStyle,
+                  ),
+                  const Spacer(),
+                  InkWell(
+                    onTap: () {
+                      Navigator.pop(ctx);
+                    },
+                    child: popButton(Icons.close, ctx, Colors.grey),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 20),
+              Container(
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(8),
+                    border: Border.all(color: Colors.black)),
+                child: ListTile(
+                  leading: const Icon(Icons.house),
+                  title: Text(
+                    "Transfer to OUR user",
+                    style: textStyles.normalTextStyleBold,
+                  ),
+                  trailing: const Icon(
+                    Icons.arrow_forward_ios,
+                    size: 13,
+                  ),
+                ),
+              ),
+              const SizedBox(height: 15),
+              Container(
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(8),
+                    border: Border.all(color: Colors.black)),
+                child: ListTile(
+                  leading: const Icon(Icons.house),
+                  title: Text(
+                    "Transfer to other Banks",
+                    style: textStyles.normalTextStyleBold,
+                  ),
+                  trailing: const Icon(
+                    Icons.arrow_forward_ios,
+                    size: 13,
+                  ),
+                  onTap: () {
+                    Navigator.pop(ctx);
+                    nextPage(
+                      context,
+                      const OutTransferPage(),
+                    );
+                  },
+                ),
+              ),
+            ],
+          ),
+        );
+      },
     );
   }
 }
