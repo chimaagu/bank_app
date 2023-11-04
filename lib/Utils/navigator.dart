@@ -9,3 +9,13 @@ nextPage(BuildContext context, Widget page) {
     ),
   );
 }
+
+nextPageAndRemoveUntil(BuildContext context, Widget page) {
+  Navigator.pushAndRemoveUntil(
+    context,
+    CupertinoPageRoute(
+      builder: (context) => page,
+    ),
+    (route) => false,
+  );
+}

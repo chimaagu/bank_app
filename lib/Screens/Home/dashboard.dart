@@ -1,8 +1,12 @@
+import 'package:bank_app/Screens/Deposit/deposit_transfer.dart';
+import 'package:bank_app/Screens/Home/withdrawal.dart';
+import 'package:bank_app/Screens/Transfers/in_app_transfer.dart';
 import 'package:bank_app/Screens/Transfers/out_transfer.dart';
 import 'package:bank_app/Screens/Transfers/transfer_page.dart';
 import 'package:bank_app/Styles/text_styles.dart';
 import 'package:bank_app/Utils/navigator.dart';
 import 'package:bank_app/Utils/pop_button.dart';
+import 'package:bank_app/WIdgets/in_app_transfer_widget.dart';
 import 'package:bank_app/WIdgets/widgets.dart';
 import 'package:bank_app/Screens/Home/profile_page.dart';
 import 'package:flutter/cupertino.dart';
@@ -190,9 +194,12 @@ class _DashBoardState extends State<DashBoard> {
                       showTransferDialog();
                     },
                   ),
-                  const QuickActionButton(
+                  QuickActionButton(
                     label: "Withdraw",
                     image: "images/charge.png",
+                    onPressed: () {
+                      nextPage(context, const WithdrawalPage());
+                    },
                   ),
                 ],
               ),
@@ -200,9 +207,12 @@ class _DashBoardState extends State<DashBoard> {
               Container(
                 margin: const EdgeInsets.symmetric(horizontal: 20),
                 height: 43,
-                child: const QuickActionButton(
-                  label: "Make an Enquiry",
+                child: QuickActionButton(
+                  label: "Deposit",
                   image: "",
+                  onPressed: () {
+                    showDepositModal();
+                  },
                 ),
               ),
               const SizedBox(height: 20),
@@ -290,6 +300,19 @@ class _DashBoardState extends State<DashBoard> {
                     Icons.arrow_forward_ios,
                     size: 13,
                   ),
+                  onTap: () {
+                    Navigator.pop(ctx);
+                    showModalBottomSheet(
+                      isScrollControlled: true,
+                      enableDrag: true,
+                      context: context,
+                      builder: (ctx) {
+                        return InAppTransferWidget(
+                          context: ctx,
+                        );
+                      },
+                    );
+                  },
                 ),
               ),
               const SizedBox(height: 15),
@@ -312,6 +335,85 @@ class _DashBoardState extends State<DashBoard> {
                     nextPage(
                       context,
                       const OutTransferPage(),
+                    );
+                  },
+                ),
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
+  void showDepositModal() {
+    showModalBottomSheet(
+      isDismissible: false,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(25),
+          topRight: Radius.circular(25),
+        ),
+      ),
+      context: context,
+      builder: (ctx) {
+        return Container(
+          padding: const EdgeInsets.all(25),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Row(
+                children: [
+                  Text(
+                    "Select Payment method",
+                    style: TextStyles().appBarStyle,
+                  ),
+                  const Spacer(),
+                  InkWell(
+                    onTap: () {
+                      Navigator.pop(ctx);
+                    },
+                    child: popButton(Icons.close, ctx, Colors.black),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 20),
+              Container(
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(8),
+                    border: Border.all(color: Colors.black)),
+                child: ListTile(
+                  leading: const Icon(Icons.house),
+                  title: Text(
+                    "Pay with Card",
+                    style: textStyles.normalTextStyleBold,
+                  ),
+                  trailing: const Icon(
+                    Icons.arrow_forward_ios,
+                    size: 13,
+                  ),
+                ),
+              ),
+              const SizedBox(height: 15),
+              Container(
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(8),
+                    border: Border.all(color: Colors.black)),
+                child: ListTile(
+                  leading: const Icon(Icons.house),
+                  title: Text(
+                    "Pay with Transfer",
+                    style: textStyles.normalTextStyleBold,
+                  ),
+                  trailing: const Icon(
+                    Icons.arrow_forward_ios,
+                    size: 13,
+                  ),
+                  onTap: () {
+                    Navigator.pop(ctx);
+                    nextPage(
+                      context,
+                      const DepositByTransfer(),
                     );
                   },
                 ),

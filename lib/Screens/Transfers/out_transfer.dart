@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:bank_app/Provider/DatabaseProvider/db_provider.dart';
+import 'package:bank_app/Screens/Home/dashboard.dart';
 import 'package:bank_app/Screens/Transfers/transfer_two.dart';
 import 'package:bank_app/Styles/colors.dart';
 import 'package:bank_app/Styles/text_styles.dart';
@@ -138,7 +139,6 @@ class _OutTransferPageState extends State<OutTransferPage> {
                       showTransactionReview();
                       // },
                       // );
-                      // DbProvider().saveFirstTransfer(isFirstTransactionStage);
                     },
                     child: isLoading == true
                         ? const CircularProgressIndicator(
@@ -335,8 +335,22 @@ class _OutTransferPageState extends State<OutTransferPage> {
                       ),
                     ),
                     onPressed: () {
-                      Navigator.pop(ctx);
-                      nextPage(context, const TransferTwoPage());
+                      setState(() {
+                        isFirstTransactionStage = true;
+                        isLoading = true;
+                      });
+                      Timer(
+                        const Duration(seconds: 3),
+                        () {
+                          setState(() {
+                            isLoading = false;
+                          });
+                          Navigator.pop(ctx);
+                          DbProvider()
+                              .saveFirstTransfer(isFirstTransactionStage);
+                          nextPageAndRemoveUntil(context, const DashBoard());
+                        },
+                      );
                     },
                     child: Text(
                       "Confirm",
