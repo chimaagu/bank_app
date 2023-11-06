@@ -1,11 +1,12 @@
+import 'package:bank_app/Provider/DatabaseProvider/db_provider.dart';
 import 'package:bank_app/Screens/Deposit/deposit_transfer.dart';
 import 'package:bank_app/Screens/Home/withdrawal.dart';
-import 'package:bank_app/Screens/Transfers/in_app_transfer.dart';
 import 'package:bank_app/Screens/Transfers/out_transfer.dart';
-import 'package:bank_app/Screens/Transfers/transfer_page.dart';
+import 'package:bank_app/Styles/colors.dart';
 import 'package:bank_app/Styles/text_styles.dart';
 import 'package:bank_app/Utils/navigator.dart';
 import 'package:bank_app/Utils/pop_button.dart';
+import 'package:bank_app/Utils/snackBar.dart';
 import 'package:bank_app/WIdgets/in_app_transfer_widget.dart';
 import 'package:bank_app/WIdgets/widgets.dart';
 import 'package:bank_app/Screens/Home/profile_page.dart';
@@ -23,6 +24,14 @@ class DashBoard extends StatefulWidget {
 class _DashBoardState extends State<DashBoard> {
   final GlobalKey<ScaffoldState> dashBoardKey = GlobalKey();
   TextStyles textStyles = TextStyles();
+
+  var pin;
+
+  @override
+  void initState() {
+    pin = DbProvider().getTransferPin();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -84,8 +93,7 @@ class _DashBoardState extends State<DashBoard> {
               const SizedBox(height: 20),
               Container(
                 margin: const EdgeInsets.symmetric(horizontal: 20),
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+                padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
                 height: 174,
                 width: double.maxFinite,
                 decoration: BoxDecoration(
@@ -94,9 +102,9 @@ class _DashBoardState extends State<DashBoard> {
                     begin: Alignment.topLeft,
                     end: Alignment.bottomRight,
                     colors: [
-                      Colors.blue,
-                      Color(0xffF58218),
-                      Colors.blue,
+                      primaryColor,
+                      secondaryColor,
+                      primaryColor,
                     ],
                   ),
                 ),
@@ -191,7 +199,12 @@ class _DashBoardState extends State<DashBoard> {
                     image: "images/arrow.png",
                     label: "Transfer",
                     onPressed: () {
-                      showTransferDialog();
+                      if(pin == null){
+                        showSnackBar("Please set a transfer pin", context);
+                      }
+                      else {
+                        showTransferDialog();
+                      }
                     },
                   ),
                   QuickActionButton(

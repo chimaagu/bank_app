@@ -1,16 +1,25 @@
 import 'package:bank_app/Screens/AuthView/sign_up_1.dart';
 import 'package:bank_app/Screens/Home/dashboard.dart';
+import 'package:bank_app/Styles/colors.dart';
+import 'package:bank_app/Styles/text_styles.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
 
   @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
+  TextStyles  textStyles = TextStyles();
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.black,
       body: Center(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -21,18 +30,12 @@ class LoginPage extends StatelessWidget {
                 Image.asset("images/logo.png"),
                 Text(
                   "Welcome back 👏",
-                  style: GoogleFonts.andika(
-                    fontSize: 30,
-                    fontWeight: FontWeight.bold,
-                  ),
+                  style: textStyles.appBarStyle.copyWith(fontSize: 30, color: Colors.white)
                 ),
                 const SizedBox(height: 10),
                 Text(
                   "Login",
-                  style: GoogleFonts.andika(
-                    fontSize: 40,
-                    fontWeight: FontWeight.bold,
-                  ),
+                  style: textStyles.appBarStyle.copyWith(color: Colors.white)
                 ),
                 const SizedBox(height: 30),
                 Column(
@@ -40,35 +43,25 @@ class LoginPage extends StatelessWidget {
                   children: [
                     Text(
                       "Email",
-                      style: GoogleFonts.andika(
-                        fontSize: 14,
-                        fontWeight: FontWeight.bold,
-                      ),
+                      style: textStyles.normalTextStyle.copyWith(color: Colors.white),
                     ),
                     TextField(
-                      style: GoogleFonts.andika(
-                        fontSize: 12,
-                        fontWeight: FontWeight.bold,
-                      ),
-                      decoration: const InputDecoration(
+                      style:  textStyles.normalTextStyle.copyWith(color: Colors.white),
+                      decoration:  InputDecoration(
                         hintText: "example@gmail.com",
+                        hintStyle: textStyles.normalTextStyle.copyWith(color: Colors.grey),
                       ),
                     ),
                     const SizedBox(height: 30),
                     Text(
                       "Password",
-                      style: GoogleFonts.andika(
-                        fontSize: 14,
-                        fontWeight: FontWeight.bold,
-                      ),
+                        style: textStyles.normalTextStyle.copyWith(color: Colors.white),
                     ),
                     TextField(
-                      style: GoogleFonts.andika(
-                        fontSize: 12,
-                        fontWeight: FontWeight.bold,
-                      ),
-                      decoration: const InputDecoration(
+                      style: textStyles.normalTextStyle.copyWith(color: Colors.white),
+                      decoration:  InputDecoration(
                         hintText: "*******",
+                        hintStyle: textStyles.normalTextStyle.copyWith(color: Colors.grey),
                       ),
                     ),
                   ],
@@ -77,7 +70,7 @@ class LoginPage extends StatelessWidget {
                 SizedBox(
                   width: double.infinity,
                   child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(),
+                    style: ElevatedButton.styleFrom(backgroundColor: secondaryColor),
                     onPressed: () {
                       Navigator.push(
                         context,
@@ -88,24 +81,17 @@ class LoginPage extends StatelessWidget {
                     },
                     child: Text(
                       "Login",
-                      style: GoogleFonts.andika(
-                        color: Colors.white,
-                        fontWeight: FontWeight.w400,
-                        fontSize: 14,
+                      style:  textStyles.normalTextStyleBold.copyWith(color: Colors.black),
                       ),
                     ),
                   ),
-                ),
                 const SizedBox(height: 30),
                 RichText(
                   text: TextSpan(
                     children: [
                       TextSpan(
                         text: "Don't have an account? ",
-                        style: GoogleFonts.andika(
-                          color: Colors.black,
-                          fontSize: 12,
-                        ),
+                        style: textStyles.normalTextStyle.copyWith(color: Colors.white)
                       ),
                       TextSpan(
                         recognizer: TapGestureRecognizer()
@@ -120,7 +106,7 @@ class LoginPage extends StatelessWidget {
                         text: "Register",
                         style: GoogleFonts.andika(
                           decoration: TextDecoration.underline,
-                          color: Theme.of(context).primaryColor,
+                          color: Colors.white,
                           fontSize: 14,
                         ),
                       ),

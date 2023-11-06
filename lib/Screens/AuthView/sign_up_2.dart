@@ -1,6 +1,7 @@
 import 'package:bank_app/Screens/AuthView/login_page.dart';
 import 'package:bank_app/Screens/AuthView/sign_up_3.dart';
 import 'package:bank_app/Screens/Home/dashboard.dart';
+import 'package:bank_app/Styles/text_styles.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -11,7 +12,9 @@ class SignUpPage2 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    TextStyles textStyles = TextStyles();
     return Scaffold(
+      backgroundColor: Colors.black,
       body: SafeArea(
         child: Center(
           child: Padding(
@@ -20,123 +23,92 @@ class SignUpPage2 extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Image.asset("images/logo.png"),
-                  Text(
-                    "Register",
-                    style: GoogleFonts.andika(
-                      fontSize: 30,
-                      fontWeight: FontWeight.bold,
-                    ),
+                  const SizedBox(height: 30),
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text("Other Details",
+                        style: textStyles.appBarStyle.copyWith(color: Colors.white, fontSize: 25)),
                   ),
-                  const SizedBox(height: 10),
-                  Text(
-                    "Kindly provide the information requested below to enable us create an account for you.",
-                    style: GoogleFonts.andika(
-                      fontSize: 12,
-                      fontWeight: FontWeight.w300,
-                    ),
-                  ),
+
                   const SizedBox(height: 30),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        "First Name",
-                        style: GoogleFonts.andika(
-                          fontSize: 14,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
+                      Text("Occupation",
+                          style: textStyles.normalTextStyleBold.copyWith(color: Colors.white)),
                       TextField(
                         style: GoogleFonts.andika(
                           fontSize: 12,
                           fontWeight: FontWeight.bold,
                         ),
-                        decoration: const InputDecoration(
-                          hintText: "Jerry",
+                        decoration: InputDecoration(
+                          hintText: "select occupation type",
+                          hintStyle: textStyles.normalTextStyle.copyWith(color: Colors.grey),
                         ),
                       ),
                       const SizedBox(height: 30),
-                      Text(
-                        "Middle Name",
-                        style: GoogleFonts.andika(
-                          fontSize: 14,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
+                      Text("Annual income range",
+                          style: textStyles.normalTextStyleBold.copyWith(color: Colors.white),),
                       TextField(
                         style: GoogleFonts.andika(
                           fontSize: 12,
                           fontWeight: FontWeight.bold,
                         ),
-                        decoration: const InputDecoration(hintText: "Smith"),
+                        decoration: InputDecoration(
+                          hintText: "Smith",
+                          hintStyle: textStyles.normalTextStyle.copyWith(color: Colors.grey),
+                        ),
                       ),
                       const SizedBox(height: 30),
-                      Text(
-                        "Last Name",
-                        style: GoogleFonts.andika(
-                          fontSize: 14,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
+                      Text("Account type",
+                          style: textStyles.normalTextStyleBold.copyWith(color: Colors.white)),
                       TextField(
                         style: GoogleFonts.andika(
                           fontSize: 12,
                           fontWeight: FontWeight.bold,
                         ),
-                        decoration: const InputDecoration(
+                        decoration: InputDecoration(
                           hintText: "Bryan",
+                          hintStyle: textStyles.normalTextStyle.copyWith(color: Colors.grey),
                         ),
                       ),
                       const SizedBox(height: 30),
-                      Text(
-                        "Country",
-                        style: GoogleFonts.andika(
-                          fontSize: 14,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
+                      Text("Account Currency",
+                          style: textStyles.normalTextStyleBold.copyWith(color: Colors.white)),
                       TextField(
                         style: GoogleFonts.andika(
                           fontSize: 12,
                           fontWeight: FontWeight.bold,
                         ),
-                        decoration: const InputDecoration(
+                        decoration: InputDecoration(
                           hintText: "Nigeria",
+                          hintStyle: textStyles.normalTextStyle.copyWith(color: Colors.grey),
                         ),
                       ),
                       const SizedBox(height: 30),
-                      Text(
-                        "State",
-                        style: GoogleFonts.andika(
-                          fontSize: 14,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
+                      Text("Password",
+                          style: textStyles.normalTextStyleBold.copyWith(color: Colors.white)),
                       TextField(
                         style: GoogleFonts.andika(
                           fontSize: 12,
                           fontWeight: FontWeight.bold,
                         ),
-                        decoration: const InputDecoration(
-                          hintText: "Lagos",
+                        decoration: InputDecoration(
+                          hintText: "******",
+                          hintStyle: textStyles.normalTextStyle.copyWith(color: Colors.grey),
                         ),
                       ),
                       const SizedBox(height: 30),
-                      Text(
-                        "City",
-                        style: GoogleFonts.andika(
-                          fontSize: 14,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
+                      Text("Confirm password",
+                          style: textStyles.normalTextStyleBold.copyWith(color: Colors.white)),
                       TextField(
                         style: GoogleFonts.andika(
                           fontSize: 12,
                           fontWeight: FontWeight.bold,
                         ),
-                        decoration: const InputDecoration(
-                          hintText: "Ikeja",
+                        decoration: InputDecoration(
+                          hintText: "******",
+                          hintStyle: textStyles.normalTextStyle.copyWith(color: Colors.grey),
                         ),
                       ),
                     ],
@@ -145,19 +117,23 @@ class SignUpPage2 extends StatelessWidget {
                   SizedBox(
                     width: double.infinity,
                     child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: const Color(0xffF58218),
+                      ),
+                        // #F58218, #1087D0
                       onPressed: () {
                         Navigator.push(
                           context,
                           CupertinoPageRoute(
-                            builder: (context) => const SignUpPage3(),
+                            builder: (context) => const DashBoard(),
                           ),
                         );
                       },
                       child: Text(
                         "Continue",
-                        style: GoogleFonts.andika(
-                          color: Colors.white,
-                          fontWeight: FontWeight.w400,
+                        style: GoogleFonts.poppins(
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold,
                           fontSize: 14,
                         ),
                       ),
@@ -170,7 +146,7 @@ class SignUpPage2 extends StatelessWidget {
                         TextSpan(
                           text: "Already have an account? ",
                           style: GoogleFonts.andika(
-                            color: Colors.black,
+                            color: Colors.white,
                             fontSize: 12,
                           ),
                         ),

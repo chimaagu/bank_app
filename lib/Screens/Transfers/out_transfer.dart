@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:bank_app/Provider/DatabaseProvider/db_provider.dart';
 import 'package:bank_app/Screens/Home/dashboard.dart';
+import 'package:bank_app/Screens/Transfers/pin_input_page.dart';
 import 'package:bank_app/Screens/Transfers/transfer_two.dart';
 import 'package:bank_app/Styles/colors.dart';
 import 'package:bank_app/Styles/text_styles.dart';
@@ -71,8 +72,7 @@ class _OutTransferPageState extends State<OutTransferPage> {
                 ),
                 Text(
                   "Balance: \$323.43",
-                  style:
-                      textStyles.normalTextStyle.copyWith(color: Colors.grey),
+                  style: textStyles.normalTextStyle.copyWith(color: Colors.grey),
                 ),
                 const SizedBox(height: 20),
                 TextField(
@@ -194,7 +194,7 @@ class _OutTransferPageState extends State<OutTransferPage> {
               ),
               const SizedBox(height: 20),
               Text(
-                "Ammount:",
+                "Amount:",
                 style: textStyles.normalTextStyleBold,
               ),
               const SizedBox(height: 5),
@@ -239,7 +239,17 @@ class _OutTransferPageState extends State<OutTransferPage> {
                   ),
                   onPressed: () {
                     Navigator.pop(ctx);
-                    showFirstError();
+                    // showFirstError();
+                    nextPage(
+                      context,
+                      PinInputPage(
+
+                        onTap: () {
+
+                          print("happy");
+                        },
+                      ),
+                    );
                   },
                   child: Text(
                     "Continue",
@@ -262,8 +272,7 @@ class _OutTransferPageState extends State<OutTransferPage> {
       context: context,
       builder: (ctx) {
         return CupertinoAlertDialog(
-          title: const Text(
-              "Oops!!\nYou do not have an international transfer code"),
+          title: const Text("Oops!!\nYou do not have an international transfer code"),
           content: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
@@ -346,8 +355,7 @@ class _OutTransferPageState extends State<OutTransferPage> {
                             isLoading = false;
                           });
                           Navigator.pop(ctx);
-                          DbProvider()
-                              .saveFirstTransfer(isFirstTransactionStage);
+                          DbProvider().saveFirstTransfer(isFirstTransactionStage);
                           nextPageAndRemoveUntil(context, const DashBoard());
                         },
                       );
