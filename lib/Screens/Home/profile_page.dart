@@ -1,4 +1,5 @@
 import 'package:bank_app/Screens/pin_settings_page.dart';
+import 'package:bank_app/Styles/colors.dart';
 import 'package:bank_app/Styles/text_styles.dart';
 import 'package:bank_app/Utils/navigator.dart';
 import 'package:flutter/material.dart';
@@ -44,7 +45,7 @@ class ProfilePage extends StatelessWidget {
                           right: 0,
                           child: CircleAvatar(
                             radius: 15,
-                            backgroundColor: Color(0xff171717),
+                            backgroundColor: secondaryColor,
                             child: Icon(
                               Icons.edit,
                               color: Colors.white,
@@ -59,10 +60,7 @@ class ProfilePage extends StatelessWidget {
                   Center(
                     child: Text(
                       "Fernandes Peps",
-                      style: GoogleFonts.andika(
-                        fontSize: 15,
-                        fontWeight: FontWeight.w600,
-                      ),
+                      style: tetStyle.normalTextStyle.copyWith(fontSize: 15)
                     ),
                   ),
                   const SizedBox(height: 20),
@@ -70,15 +68,13 @@ class ProfilePage extends StatelessWidget {
                     margin: const EdgeInsets.symmetric(horizontal: 10),
                     height: 40,
                     decoration: BoxDecoration(
-                      color: const Color(0xff171717),
+                      color:primaryColor,
                       borderRadius: BorderRadius.circular(10),
                     ),
                     child: Center(
                       child: Text(
-                        "Edit Profile",
-                        style: GoogleFonts.andika(
-                          color: Colors.white,
-                        ),
+                        "Other details",
+                        style:tetStyle.normalTextStyleBold.copyWith(color: Colors.white)
                       ),
                     ),
                   ),

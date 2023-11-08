@@ -7,12 +7,14 @@ import 'package:bank_app/Styles/text_styles.dart';
 import 'package:bank_app/Utils/navigator.dart';
 import 'package:bank_app/Utils/pop_button.dart';
 import 'package:bank_app/Utils/snackBar.dart';
+import 'package:bank_app/WIdgets/drawer_widget.dart';
 import 'package:bank_app/WIdgets/in_app_transfer_widget.dart';
 import 'package:bank_app/WIdgets/widgets.dart';
 import 'package:bank_app/Screens/Home/profile_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
 
 class DashBoard extends StatefulWidget {
   const DashBoard({super.key});
@@ -26,6 +28,8 @@ class _DashBoardState extends State<DashBoard> {
   TextStyles textStyles = TextStyles();
 
   var pin;
+  final formatCurrency = NumberFormat.simpleCurrency();
+  bool isObscure = false;
 
   @override
   void initState() {
@@ -109,40 +113,30 @@ class _DashBoardState extends State<DashBoard> {
                   ),
                 ),
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Row(
-                      children: [
-                        Text(
-                          "Savings Account",
-                          style: GoogleFonts.andika(
-                            fontSize: 14,
-                            // fontWeight: FontWeight.w100,
-                            color: Colors.white,
-                          ),
-                        ),
-                        const SizedBox(width: 10),
-                        Text(
-                          "452 050 791",
-                          style: GoogleFonts.andika(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w400,
-                            color: Colors.white,
-                          ),
-                        ),
-                        const Spacer(),
-                        const Icon(
-                          Icons.more_horiz,
+                    AnimatedAlign(
+                      curve: Curves.ease,
+                      alignment: Alignment.topRight,
+                      duration: const Duration(milliseconds: 500),
+                      child: InkWell(
+                        onTap: () {
+                          setState(() {
+                            isObscure = !isObscure;
+                          });
+                        },
+                        child:  Icon(
+                          isObscure == true? Icons.visibility : Icons.visibility_off_rounded,
                           color: Colors.white,
-                        )
-                      ],
+                        ),
+                      ),
                     ),
                     Center(
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
-                            r"$205,82",
+                            isObscure != true ? "----------" : formatCurrency.format(203577),
                             style: GoogleFonts.andika(
                               fontSize: 32,
                               color: Colors.white,
@@ -152,23 +146,12 @@ class _DashBoardState extends State<DashBoard> {
                           const SizedBox(height: 10),
                           Text(
                             "Account balance",
-                            style: GoogleFonts.andika(
-                              fontSize: 16,
-                              color: Colors.white,
-                            ),
+                            style: textStyles.normalTextStyle.copyWith(color: Colors.white)
                           ),
                         ],
                       ),
                     ),
-                    const AnimatedAlign(
-                      curve: Curves.ease,
-                      alignment: Alignment.bottomRight,
-                      duration: Duration(milliseconds: 500),
-                      child: Icon(
-                        Icons.visibility_outlined,
-                        color: Colors.white,
-                      ),
-                    )
+
                   ],
                 ),
               ),
@@ -189,44 +172,42 @@ class _DashBoardState extends State<DashBoard> {
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 shrinkWrap: true,
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  mainAxisExtent: 43,
-                  mainAxisSpacing: 15,
-                  crossAxisSpacing: 30,
+                  crossAxisCount: 3,
+                  mainAxisExtent: 100,
+                  mainAxisSpacing: 10,
+                  crossAxisSpacing: 10,
                 ),
                 children: [
                   QuickActionButton(
-                    image: "images/arrow.png",
+                    image: Icons.arrow_forward,
                     label: "Transfer",
                     onPressed: () {
-                      if(pin == null){
+                      if (pin == null) {
                         showSnackBar("Please set a transfer pin", context);
-                      }
-                      else {
+                      } else {
                         showTransferDialog();
                       }
                     },
                   ),
                   QuickActionButton(
                     label: "Withdraw",
-                    image: "images/charge.png",
+                    image: Icons.arrow_downward_rounded,
                     onPressed: () {
                       nextPage(context, const WithdrawalPage());
                     },
                   ),
+                  QuickActionButton(
+                    label: "Deposit",
+                    image: Icons.add,
+                    onPressed: () {
+                      // showDepositModal();
+                      nextPage(
+                        context,
+                        const DepositByTransfer(),
+                      );
+                    },
+                  ),
                 ],
-              ),
-              const SizedBox(height: 10),
-              Container(
-                margin: const EdgeInsets.symmetric(horizontal: 20),
-                height: 43,
-                child: QuickActionButton(
-                  label: "Deposit",
-                  image: "",
-                  onPressed: () {
-                    showDepositModal();
-                  },
-                ),
               ),
               const SizedBox(height: 20),
               Padding(
@@ -439,74 +420,4 @@ class _DashBoardState extends State<DashBoard> {
   }
 }
 
-class DrawerWidget extends StatelessWidget {
-  const DrawerWidget({
-    super.key,
-  });
 
-  @override
-  Widget build(BuildContext context) {
-    return Drawer(
-      shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.only(
-        topRight: Radius.circular(20),
-        bottomRight: Radius.circular(20),
-      )),
-      width: 250,
-      child: ListView(
-        children: [
-          DrawerHeader(
-            decoration: BoxDecoration(
-              color: Theme.of(context).primaryColor,
-            ),
-            child: Image.asset(
-              "images/logo_drawer.png",
-            ),
-          ),
-          const Divider(color: Colors.blue),
-          const ListTile(
-            title: Text(
-              "Services",
-            ),
-            trailing: Icon(
-              Icons.arrow_forward_ios,
-              size: 15,
-            ),
-          ),
-          const Divider(color: Colors.blue),
-          const ListTile(
-            title: Text(
-              "Apply now",
-              style: TextStyle(),
-            ),
-            trailing: Icon(
-              Icons.arrow_forward_ios,
-              size: 15,
-            ),
-          ),
-          const Divider(color: Colors.blue),
-          const ListTile(
-            title: Text(
-              "Get Intouch",
-            ),
-            trailing: Icon(
-              Icons.arrow_forward_ios,
-              size: 15,
-            ),
-          ),
-          const Divider(color: Colors.blue),
-          const ListTile(
-            title: Text(
-              "Log Out",
-            ),
-            trailing: Icon(
-              Icons.logout_rounded,
-              color: Colors.red,
-              size: 15,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}

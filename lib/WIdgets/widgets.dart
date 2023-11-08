@@ -5,7 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 class QuickActionButton extends StatelessWidget {
   final String label;
-  final String? image;
+  final IconData? image;
   final VoidCallback? onPressed;
   const QuickActionButton({
     super.key,
@@ -19,7 +19,7 @@ class QuickActionButton extends StatelessWidget {
     return InkWell(
       onTap: onPressed,
       child: Container(
-        decoration: BoxDecoration(
+          decoration: BoxDecoration(
           color: primaryColor,
           borderRadius: BorderRadius.circular(15),
           boxShadow: [
@@ -29,11 +29,11 @@ class QuickActionButton extends StatelessWidget {
             ),
           ],
         ),
-        child: Row(
+        child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            image == "" ? const SizedBox() : Image.asset(image!),
-            const SizedBox(width: 15),
+            image == null ? const SizedBox() : Icon(image!, color: Colors.white,),
+            const SizedBox(width: 20),
             Text(
               label,
               style: TextStyles()

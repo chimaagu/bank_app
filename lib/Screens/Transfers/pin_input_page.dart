@@ -9,14 +9,14 @@ import 'package:pinput/pinput.dart';
 
 class PinInputPage extends StatefulWidget {
   VoidCallback? onTap;
-   PinInputPage({super.key, this.onTap});
+  PinInputPage({super.key, this.onTap});
 
   @override
   State<PinInputPage> createState() => _PinInputPageState();
 }
 
 class _PinInputPageState extends State<PinInputPage> {
-
+  bool isLoading = false;
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +47,9 @@ class _PinInputPageState extends State<PinInputPage> {
                 const SizedBox(height: 50),
                 buildPinPut(),
                 const SizedBox(height: 50),
-                // const CircularProgressIndicator(color: secondaryColor),
+                isLoading == true
+                    ? const CircularProgressIndicator(color: secondaryColor)
+                    : const SizedBox(),
                 const Spacer(),
                 SizedBox(
                   width: double.maxFinite,
@@ -58,9 +60,7 @@ class _PinInputPageState extends State<PinInputPage> {
                         borderRadius: BorderRadius.circular(10),
                       ),
                     ),
-                    onPressed: () {
-
-                    },
+                    onPressed: widget.onTap,
                     child: Text(
                       "Continue",
                       style: TextStyles().normalTextStyleBold.copyWith(color: secondaryColor),

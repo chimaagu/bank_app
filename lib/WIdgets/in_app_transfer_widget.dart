@@ -1,8 +1,11 @@
 import 'dart:async';
 
 import 'package:bank_app/Screens/Transfers/in_app_transfer.dart';
+import 'package:bank_app/Screens/Transfers/out_transfer.dart';
+import 'package:bank_app/Screens/Transfers/transfer_page.dart';
 import 'package:bank_app/Styles/colors.dart';
 import 'package:bank_app/Styles/text_styles.dart';
+import 'package:bank_app/Utils/navigator.dart';
 import 'package:bank_app/Utils/pop_button.dart';
 import 'package:bank_app/WIdgets/custom_button.dart';
 import 'package:flutter/material.dart';
@@ -51,9 +54,7 @@ class _InAppTransferWidgetState extends State<InAppTransferWidget> {
             CircleAvatar(
               radius: 50,
               backgroundColor: primaryColor,
-              backgroundImage: isVerified != false
-                  ? const AssetImage("images/wife.png")
-                  : null,
+              backgroundImage: isVerified != false ? const AssetImage("images/wife.png") : null,
               child: isVerified == false
                   ? const Icon(
                       Icons.person,
@@ -65,7 +66,7 @@ class _InAppTransferWidgetState extends State<InAppTransferWidget> {
             const SizedBox(height: 5),
             isVerified == true
                 ? Text(
-                    "Fernandes mich",
+                    "Fernandez mich",
                     style: TextStyles().normalTextStyle,
                   )
                 : const Text(""),
@@ -95,9 +96,12 @@ class _InAppTransferWidgetState extends State<InAppTransferWidget> {
                       ? "Continue"
                       : "Verify",
               onTap: () {
-                isVerified != true
-                    ? verify()
-                    : showTransferPage(widget.context);
+                if (isVerified != true) {
+                  verify();
+                } else {
+                  Navigator.pop(context);
+                  nextPage(context, const OutTransferPage());
+                }
               },
             ),
           ],

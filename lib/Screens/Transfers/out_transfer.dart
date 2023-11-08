@@ -243,10 +243,9 @@ class _OutTransferPageState extends State<OutTransferPage> {
                     nextPage(
                       context,
                       PinInputPage(
-
                         onTap: () {
-
-                          print("happy");
+                          Navigator.of(context).pop();
+                          showFirstError();
                         },
                       ),
                     );

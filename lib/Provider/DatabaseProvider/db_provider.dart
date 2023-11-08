@@ -9,22 +9,23 @@ class DbProvider {
     // print(firstTransfer);
   }
 
+
   saveTransferPin(String transferPin) async {
     SharedPreferences sf = await SharedPreferences.getInstance();
     sf.setString("transferPin", transferPin);
-    print(transferPin);
+    // print(transferPin);
   }
 
   //TODO: getting user preferences
   getFirstTransfer() async {
     SharedPreferences sf = await SharedPreferences.getInstance();
     var value = sf.getBool("firstTransfer");
-    print("gotten $value");
+    // print("gotten $value");
   }
 
   getTransferPin() async {
     SharedPreferences sf = await SharedPreferences.getInstance();
     var value = sf.getString("transferPin");
-    print("gotten $value");
+    // print("gotten $value");
   }
 }
