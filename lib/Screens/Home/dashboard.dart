@@ -29,7 +29,7 @@ class _DashBoardState extends State<DashBoard> {
 
   var pin;
   final formatCurrency = NumberFormat.simpleCurrency();
-  bool isObscure = false;
+  bool isObscure = true;
 
   @override
   void initState() {
@@ -106,6 +106,8 @@ class _DashBoardState extends State<DashBoard> {
                     begin: Alignment.topLeft,
                     end: Alignment.bottomRight,
                     colors: [
+                      primaryColor,
+                      primaryColor,
                       primaryColor,
                       secondaryColor,
                       primaryColor,
