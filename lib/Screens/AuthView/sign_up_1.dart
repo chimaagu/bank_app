@@ -2,6 +2,7 @@ import 'package:bank_app/Screens/AuthView/login_page.dart';
 import 'package:bank_app/Screens/AuthView/sign_up_2.dart';
 import 'package:bank_app/Styles/colors.dart';
 import 'package:bank_app/Styles/text_styles.dart';
+import 'package:bank_app/Utils/snackBar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -47,7 +48,8 @@ class _SignUpPageState extends State<SignUpPage> {
                   Text(
                     "Kindly provide the information requested below to enable us create an account for you.",
                     textAlign: TextAlign.center,
-                    style: textStyles.normalTextStyle.copyWith(color: Colors.white),
+                    style: textStyles.normalTextStyle
+                        .copyWith(color: Colors.white),
                   ),
                   const SizedBox(height: 50),
                   Column(
@@ -61,6 +63,7 @@ class _SignUpPageState extends State<SignUpPage> {
                         ),
                       ),
                       TextField(
+                        cursorColor: secondaryColor,
                         controller: email,
                         style: textStyles.normalTextStyle.copyWith(
                           color: Colors.white,
@@ -71,6 +74,9 @@ class _SignUpPageState extends State<SignUpPage> {
                           hintStyle: textStyles.normalTextStyle.copyWith(
                             color: Colors.grey,
                             fontSize: 12,
+                          ),
+                          focusedBorder: const UnderlineInputBorder(
+                            borderSide: BorderSide(color: secondaryColor),
                           ),
                         ),
                       ),
@@ -83,12 +89,17 @@ class _SignUpPageState extends State<SignUpPage> {
                         ),
                       ),
                       TextField(
+                        cursorColor: secondaryColor,
                         controller: phone,
                         style: GoogleFonts.andika(
                           fontSize: 12,
+                          color: Colors.white,
                           fontWeight: FontWeight.bold,
                         ),
                         decoration: InputDecoration(
+                          focusedBorder: const UnderlineInputBorder(
+                            borderSide: BorderSide(color: secondaryColor),
+                          ),
                           hintText: "phone number",
                           hintStyle: textStyles.normalTextStyle.copyWith(
                             color: Colors.grey,
@@ -103,15 +114,20 @@ class _SignUpPageState extends State<SignUpPage> {
                             .copyWith(color: Colors.white, fontSize: 14),
                       ),
                       TextField(
+                        cursorColor: secondaryColor,
                         controller: fullName,
                         style: GoogleFonts.andika(
                           fontSize: 12,
+                          color: Colors.white,
                           fontWeight: FontWeight.bold,
                         ),
                         decoration: InputDecoration(
+                          focusedBorder: const UnderlineInputBorder(
+                            borderSide: BorderSide(color: secondaryColor),
+                          ),
                           hintText: "fernandes",
-                          hintStyle:
-                              textStyles.normalTextStyle.copyWith(color: Colors.grey, fontSize: 12),
+                          hintStyle: textStyles.normalTextStyle
+                              .copyWith(color: Colors.grey, fontSize: 12),
                         ),
                       ),
                       const SizedBox(height: 30),
@@ -121,12 +137,17 @@ class _SignUpPageState extends State<SignUpPage> {
                             .copyWith(color: Colors.white, fontSize: 14),
                       ),
                       TextField(
+                        cursorColor: secondaryColor,
                         controller: dob,
                         style: GoogleFonts.andika(
                           fontSize: 12,
+                          color: Colors.white,
                           fontWeight: FontWeight.bold,
                         ),
                         decoration: InputDecoration(
+                          focusedBorder: const UnderlineInputBorder(
+                            borderSide: BorderSide(color: secondaryColor),
+                          ),
                           hintText: "12/11/2020",
                           hintStyle: textStyles.normalTextStyle.copyWith(
                             color: Colors.grey,
@@ -136,56 +157,25 @@ class _SignUpPageState extends State<SignUpPage> {
                       ),
                       const SizedBox(height: 30),
                       Text(
-                        "State",
-                        style: textStyles.normalTextStyleBold
-                            .copyWith(color: Colors.white, fontSize: 14),
-                      ),
-                      TextField(
-                        controller: state,
-                        style: GoogleFonts.andika(
-                          fontSize: 12,
-                          fontWeight: FontWeight.bold,
-                        ),
-                        decoration: InputDecoration(
-                          hintText: "Lagos",
-                          hintStyle:
-                              textStyles.normalTextStyle.copyWith(color: Colors.grey, fontSize: 12),
-                        ),
-                      ),
-                      const SizedBox(height: 30),
-                      Text(
-                        "City",
-                        style: textStyles.normalTextStyleBold
-                            .copyWith(color: Colors.white, fontSize: 14),
-                      ),
-                      TextField(
-                        controller: city,
-                        style: GoogleFonts.andika(
-                          fontSize: 12,
-                          fontWeight: FontWeight.bold,
-                        ),
-                        decoration: InputDecoration(
-                          hintText: "Ikeja",
-                          hintStyle:
-                              textStyles.normalTextStyle.copyWith(color: Colors.grey, fontSize: 12),
-                        ),
-                      ),
-                      const SizedBox(height: 30),
-                      Text(
                         "Country",
                         style: textStyles.normalTextStyleBold
                             .copyWith(color: Colors.white, fontSize: 14),
                       ),
                       TextField(
+                        cursorColor: secondaryColor,
                         controller: country,
                         style: GoogleFonts.andika(
+                          color: Colors.white,
                           fontSize: 12,
                           fontWeight: FontWeight.bold,
                         ),
                         decoration: InputDecoration(
+                          focusedBorder: const UnderlineInputBorder(
+                            borderSide: BorderSide(color: secondaryColor),
+                          ),
                           hintText: "Ikeja",
-                          hintStyle:
-                              textStyles.normalTextStyle.copyWith(color: Colors.grey, fontSize: 12),
+                          hintStyle: textStyles.normalTextStyle
+                              .copyWith(color: Colors.grey, fontSize: 12),
                         ),
                       ),
                     ],
@@ -194,14 +184,29 @@ class _SignUpPageState extends State<SignUpPage> {
                   SizedBox(
                     width: double.infinity,
                     child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(backgroundColor: secondaryColor),
+                      style: ElevatedButton.styleFrom(
+                          backgroundColor: secondaryColor),
                       onPressed: () {
-                        Navigator.push(
-                          context,
-                          CupertinoPageRoute(
-                            builder: (context) => const SignUpPage2(),
-                          ),
-                        );
+                        if (email.text.isEmpty ||
+                            phone.text.isEmpty ||
+                            fullName.text.isEmpty ||
+                            dob.text.isEmpty ||
+                            country.text.isEmpty) {
+                          showSnackBar("All Fields are required", context);
+                        } else {
+                          Navigator.push(
+                            context,
+                            CupertinoPageRoute(
+                              builder: (context) => SignUpPage2(
+                                country: country.text,
+                                dob: dob.text,
+                                email: email.text,
+                                name: fullName.text,
+                                phone: phone.text,
+                              ),
+                            ),
+                          );
+                        }
                       },
                       child: Text(
                         "Continue",

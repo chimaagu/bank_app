@@ -1,5 +1,6 @@
 import 'package:bank_app/Provider/auth_provider.dart';
 import 'package:bank_app/Screens/AuthView/sign_up_1.dart';
+import 'package:bank_app/Screens/AuthView/sign_up_2.dart';
 import 'package:bank_app/Screens/Home/dashboard.dart';
 import 'package:bank_app/Styles/colors.dart';
 import 'package:bank_app/Styles/text_styles.dart';
@@ -8,6 +9,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -17,6 +19,19 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  @override
+  void initState() {
+    getData();
+    // TODO: implement initState
+    super.initState();
+  }
+
+  getData() async {
+    SharedPreferences sf = await SharedPreferences.getInstance();
+    bool name = sf.containsKey("email");
+    print(name);
+  }
+
   TextStyles textStyles = TextStyles();
   @override
   Widget build(BuildContext context) {
@@ -29,36 +44,50 @@ class _LoginPageState extends State<LoginPage> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Image.asset("images/logo.png"),
+                // Image.asset("images/logo.png"),
                 Text("Welcome back 👏",
-                    style: textStyles.appBarStyle.copyWith(fontSize: 30, color: Colors.white)),
-                const SizedBox(height: 10),
-                Text("Login", style: textStyles.appBarStyle.copyWith(color: Colors.white)),
+                    style: textStyles.appBarStyle
+                        .copyWith(fontSize: 50, color: Colors.white)),
+                const SizedBox(height: 15),
+                Text(
+                  "Login",
+                  style: textStyles.appBarStyle.copyWith(
+                    color: Colors.white,
+                    fontSize: 30,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
                 const SizedBox(height: 30),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
                       "Email",
-                      style: textStyles.normalTextStyle.copyWith(color: Colors.white),
+                      style: textStyles.normalTextStyle
+                          .copyWith(color: Colors.white),
                     ),
                     TextField(
-                      style: textStyles.normalTextStyle.copyWith(color: Colors.white),
+                      style: textStyles.normalTextStyle
+                          .copyWith(color: Colors.white),
                       decoration: InputDecoration(
                         hintText: "example@gmail.com",
-                        hintStyle: textStyles.normalTextStyle.copyWith(color: Colors.grey),
+                        hintStyle: textStyles.normalTextStyle
+                            .copyWith(color: Colors.grey),
                       ),
                     ),
                     const SizedBox(height: 30),
                     Text(
                       "Password",
-                      style: textStyles.normalTextStyle.copyWith(color: Colors.white),
+                      style: textStyles.normalTextStyle
+                          .copyWith(color: Colors.white),
                     ),
                     TextField(
-                      style: textStyles.normalTextStyle.copyWith(color: Colors.white),
+                      style: textStyles.normalTextStyle
+                          .copyWith(color: Colors.white),
                       decoration: InputDecoration(
                         hintText: "*******",
-                        hintStyle: textStyles.normalTextStyle.copyWith(color: Colors.grey),
+                        hintStyle: textStyles.normalTextStyle
+                            .copyWith(color: Colors.grey),
                       ),
                     ),
                   ],
@@ -66,17 +95,18 @@ class _LoginPageState extends State<LoginPage> {
                 const SizedBox(height: 30),
                 SizedBox(
                   width: double.infinity,
-                  child: Consumer<AuthProvider>(builder: (context, auth, child) {
+                  child:
+                      Consumer<AuthProvider>(builder: (context, auth, child) {
                     return ElevatedButton(
-                      style: ElevatedButton.styleFrom(backgroundColor: secondaryColor),
+                      style: ElevatedButton.styleFrom(
+                          backgroundColor: secondaryColor),
                       onPressed: () {
-                        auth.login();
-                        // Navigator.push(
-                        //   context,
-                        //   CupertinoPageRoute(
-                        //     builder: (context) => const DashBoard(),
-                        //   ),
-                        // );
+                        Navigator.push(
+                          context,
+                          CupertinoPageRoute(
+                            builder: (context) => const DashBoard(),
+                          ),
+                        );
                       },
                       child: auth.isLoading
                           ? const SizedBox(
@@ -101,7 +131,8 @@ class _LoginPageState extends State<LoginPage> {
                     children: [
                       TextSpan(
                           text: "Don't have an account? ",
-                          style: textStyles.normalTextStyle.copyWith(color: Colors.white)),
+                          style: textStyles.normalTextStyle
+                              .copyWith(color: Colors.white)),
                       TextSpan(
                         recognizer: TapGestureRecognizer()
                           ..onTap = () {
