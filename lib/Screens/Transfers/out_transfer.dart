@@ -72,13 +72,14 @@ class _OutTransferPageState extends State<OutTransferPage> {
                 ),
                 Text(
                   "Balance: \$323.43",
-                  style: textStyles.normalTextStyle.copyWith(color: Colors.grey),
+                  style:
+                      textStyles.normalTextStyle.copyWith(color: Colors.grey),
                 ),
                 const SizedBox(height: 20),
                 TextField(
                   controller: bank,
                   decoration: InputDecoration(
-                    labelText: "Recipient Bank Name",
+                    labelText: "Bank Name",
                     labelStyle: textStyles.normalTextStyle,
                   ),
                 ),
@@ -97,7 +98,18 @@ class _OutTransferPageState extends State<OutTransferPage> {
                 TextField(
                   controller: name,
                   decoration: InputDecoration(
-                    labelText: "Account holder",
+                    labelText: "Account Name",
+                    labelStyle: textStyles.normalTextStyle,
+                    suffixIcon: const Icon(
+                      Icons.keyboard_arrow_down_rounded,
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 15),
+                TextField(
+                  controller: name,
+                  decoration: InputDecoration(
+                    labelText: "Swift Code",
                     labelStyle: textStyles.normalTextStyle,
                     suffixIcon: const Icon(
                       Icons.keyboard_arrow_down_rounded,
@@ -108,7 +120,7 @@ class _OutTransferPageState extends State<OutTransferPage> {
                 TextField(
                   controller: desc,
                   decoration: InputDecoration(
-                    labelText: "Description(optional)",
+                    labelText: "Purpose of transfer",
                     labelStyle: textStyles.normalTextStyle,
                     suffixIcon: const Icon(
                       Icons.keyboard_arrow_down_rounded,
@@ -271,7 +283,8 @@ class _OutTransferPageState extends State<OutTransferPage> {
       context: context,
       builder: (ctx) {
         return CupertinoAlertDialog(
-          title: const Text("Oops!!\nYou do not have an international transfer code"),
+          title: const Text(
+              "Oops!!\nYou do not have an international transfer code"),
           content: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
@@ -354,7 +367,8 @@ class _OutTransferPageState extends State<OutTransferPage> {
                             isLoading = false;
                           });
                           Navigator.pop(ctx);
-                          DbProvider().saveFirstTransfer(isFirstTransactionStage);
+                          DbProvider()
+                              .saveFirstTransfer(isFirstTransactionStage);
                           nextPageAndRemoveUntil(context, const DashBoard());
                         },
                       );

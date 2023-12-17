@@ -16,6 +16,13 @@ class SignUpPage extends StatefulWidget {
 
 class _SignUpPageState extends State<SignUpPage> {
   TextStyles textStyles = TextStyles();
+  TextEditingController email = TextEditingController();
+  TextEditingController phone = TextEditingController();
+  TextEditingController fullName = TextEditingController();
+  TextEditingController dob = TextEditingController();
+  TextEditingController state = TextEditingController();
+  TextEditingController city = TextEditingController();
+  TextEditingController country = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,51 +35,67 @@ class _SignUpPageState extends State<SignUpPage> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Image.asset("images/logo.png"),
-                  Text("Register",
-                      style: textStyles.appBarStyle.copyWith(color: Colors.white, fontSize: 30)),
+                  const SizedBox(height: 30),
+                  Text(
+                    "Register",
+                    style: textStyles.appBarStyle.copyWith(
+                      color: Colors.white,
+                      fontSize: 50,
+                    ),
+                  ),
                   const SizedBox(height: 10),
                   Text(
                     "Kindly provide the information requested below to enable us create an account for you.",
+                    textAlign: TextAlign.center,
                     style: textStyles.normalTextStyle.copyWith(color: Colors.white),
                   ),
-                  const SizedBox(height: 30),
+                  const SizedBox(height: 50),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
                         "Email",
-                        style: textStyles.normalTextStyleBold
-                            .copyWith(color: Colors.white, fontSize: 14),
+                        style: textStyles.normalTextStyleBold.copyWith(
+                          color: Colors.white,
+                          fontSize: 14,
+                        ),
                       ),
                       TextField(
-                        style:
-                            textStyles.normalTextStyle.copyWith(color: Colors.white, fontSize: 12),
+                        controller: email,
+                        style: textStyles.normalTextStyle.copyWith(
+                          color: Colors.white,
+                          fontSize: 12,
+                        ),
                         decoration: InputDecoration(
                           hintText: "example@gmail.com",
-                          hintStyle:
-                              textStyles.normalTextStyle.copyWith(color: Colors.grey, fontSize: 12),
+                          hintStyle: textStyles.normalTextStyle.copyWith(
+                            color: Colors.grey,
+                            fontSize: 12,
+                          ),
                         ),
                       ),
                       const SizedBox(height: 30),
                       Text(
                         "Phone Number",
-                        style: textStyles.normalTextStyleBold
-                            .copyWith(color: Colors.white, fontSize: 14),
+                        style: textStyles.normalTextStyleBold.copyWith(
+                          color: Colors.white,
+                          fontSize: 14,
+                        ),
                       ),
                       TextField(
+                        controller: phone,
                         style: GoogleFonts.andika(
                           fontSize: 12,
                           fontWeight: FontWeight.bold,
                         ),
                         decoration: InputDecoration(
                           hintText: "phone number",
-                          hintStyle:
-                              textStyles.normalTextStyle.copyWith(color: Colors.grey, fontSize: 12),
+                          hintStyle: textStyles.normalTextStyle.copyWith(
+                            color: Colors.grey,
+                            fontSize: 12,
+                          ),
                         ),
                       ),
-                      const SizedBox(height: 30),
-
                       const SizedBox(height: 30),
                       Text(
                         "Full name",
@@ -80,14 +103,15 @@ class _SignUpPageState extends State<SignUpPage> {
                             .copyWith(color: Colors.white, fontSize: 14),
                       ),
                       TextField(
+                        controller: fullName,
                         style: GoogleFonts.andika(
                           fontSize: 12,
                           fontWeight: FontWeight.bold,
                         ),
-                        decoration:  InputDecoration(
+                        decoration: InputDecoration(
                           hintText: "fernandes",
                           hintStyle:
-                          textStyles.normalTextStyle.copyWith(color: Colors.grey, fontSize: 12),
+                              textStyles.normalTextStyle.copyWith(color: Colors.grey, fontSize: 12),
                         ),
                       ),
                       const SizedBox(height: 30),
@@ -96,19 +120,20 @@ class _SignUpPageState extends State<SignUpPage> {
                         style: textStyles.normalTextStyleBold
                             .copyWith(color: Colors.white, fontSize: 14),
                       ),
-
                       TextField(
+                        controller: dob,
                         style: GoogleFonts.andika(
                           fontSize: 12,
                           fontWeight: FontWeight.bold,
                         ),
-                        decoration:  InputDecoration(
+                        decoration: InputDecoration(
                           hintText: "12/11/2020",
-                          hintStyle:
-                          textStyles.normalTextStyle.copyWith(color: Colors.grey, fontSize: 12),
+                          hintStyle: textStyles.normalTextStyle.copyWith(
+                            color: Colors.grey,
+                            fontSize: 12,
+                          ),
                         ),
                       ),
-
                       const SizedBox(height: 30),
                       Text(
                         "State",
@@ -116,14 +141,15 @@ class _SignUpPageState extends State<SignUpPage> {
                             .copyWith(color: Colors.white, fontSize: 14),
                       ),
                       TextField(
+                        controller: state,
                         style: GoogleFonts.andika(
                           fontSize: 12,
                           fontWeight: FontWeight.bold,
                         ),
-                        decoration:  InputDecoration(
+                        decoration: InputDecoration(
                           hintText: "Lagos",
                           hintStyle:
-                          textStyles.normalTextStyle.copyWith(color: Colors.grey, fontSize: 12),
+                              textStyles.normalTextStyle.copyWith(color: Colors.grey, fontSize: 12),
                         ),
                       ),
                       const SizedBox(height: 30),
@@ -133,14 +159,15 @@ class _SignUpPageState extends State<SignUpPage> {
                             .copyWith(color: Colors.white, fontSize: 14),
                       ),
                       TextField(
+                        controller: city,
                         style: GoogleFonts.andika(
                           fontSize: 12,
                           fontWeight: FontWeight.bold,
                         ),
-                        decoration:  InputDecoration(
+                        decoration: InputDecoration(
                           hintText: "Ikeja",
                           hintStyle:
-                          textStyles.normalTextStyle.copyWith(color: Colors.grey, fontSize: 12),
+                              textStyles.normalTextStyle.copyWith(color: Colors.grey, fontSize: 12),
                         ),
                       ),
                       const SizedBox(height: 30),
@@ -150,14 +177,15 @@ class _SignUpPageState extends State<SignUpPage> {
                             .copyWith(color: Colors.white, fontSize: 14),
                       ),
                       TextField(
+                        controller: country,
                         style: GoogleFonts.andika(
                           fontSize: 12,
                           fontWeight: FontWeight.bold,
                         ),
-                        decoration:  InputDecoration(
+                        decoration: InputDecoration(
                           hintText: "Ikeja",
                           hintStyle:
-                          textStyles.normalTextStyle.copyWith(color: Colors.grey, fontSize: 12),
+                              textStyles.normalTextStyle.copyWith(color: Colors.grey, fontSize: 12),
                         ),
                       ),
                     ],
@@ -209,7 +237,7 @@ class _SignUpPageState extends State<SignUpPage> {
                           text: "Login",
                           style: GoogleFonts.poppins(
                             decoration: TextDecoration.underline,
-                            color: Colors.blue,
+                            color: secondaryColor,
                             fontSize: 14,
                           ),
                         ),

@@ -1,3 +1,4 @@
+import 'package:bank_app/Provider/auth_provider.dart';
 import 'package:bank_app/Screens/AuthView/sign_up_1.dart';
 import 'package:bank_app/Screens/Home/dashboard.dart';
 import 'package:bank_app/Styles/colors.dart';
@@ -6,6 +7,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -15,7 +17,7 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  TextStyles  textStyles = TextStyles();
+  TextStyles textStyles = TextStyles();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,15 +30,10 @@ class _LoginPageState extends State<LoginPage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Image.asset("images/logo.png"),
-                Text(
-                  "Welcome back 👏",
-                  style: textStyles.appBarStyle.copyWith(fontSize: 30, color: Colors.white)
-                ),
+                Text("Welcome back 👏",
+                    style: textStyles.appBarStyle.copyWith(fontSize: 30, color: Colors.white)),
                 const SizedBox(height: 10),
-                Text(
-                  "Login",
-                  style: textStyles.appBarStyle.copyWith(color: Colors.white)
-                ),
+                Text("Login", style: textStyles.appBarStyle.copyWith(color: Colors.white)),
                 const SizedBox(height: 30),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -46,8 +43,8 @@ class _LoginPageState extends State<LoginPage> {
                       style: textStyles.normalTextStyle.copyWith(color: Colors.white),
                     ),
                     TextField(
-                      style:  textStyles.normalTextStyle.copyWith(color: Colors.white),
-                      decoration:  InputDecoration(
+                      style: textStyles.normalTextStyle.copyWith(color: Colors.white),
+                      decoration: InputDecoration(
                         hintText: "example@gmail.com",
                         hintStyle: textStyles.normalTextStyle.copyWith(color: Colors.grey),
                       ),
@@ -55,11 +52,11 @@ class _LoginPageState extends State<LoginPage> {
                     const SizedBox(height: 30),
                     Text(
                       "Password",
-                        style: textStyles.normalTextStyle.copyWith(color: Colors.white),
+                      style: textStyles.normalTextStyle.copyWith(color: Colors.white),
                     ),
                     TextField(
                       style: textStyles.normalTextStyle.copyWith(color: Colors.white),
-                      decoration:  InputDecoration(
+                      decoration: InputDecoration(
                         hintText: "*******",
                         hintStyle: textStyles.normalTextStyle.copyWith(color: Colors.grey),
                       ),
@@ -69,30 +66,42 @@ class _LoginPageState extends State<LoginPage> {
                 const SizedBox(height: 30),
                 SizedBox(
                   width: double.infinity,
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(backgroundColor: secondaryColor),
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        CupertinoPageRoute(
-                          builder: (context) => const DashBoard(),
-                        ),
-                      );
-                    },
-                    child: Text(
-                      "Login",
-                      style:  textStyles.normalTextStyleBold.copyWith(color: Colors.black),
-                      ),
-                    ),
-                  ),
+                  child: Consumer<AuthProvider>(builder: (context, auth, child) {
+                    return ElevatedButton(
+                      style: ElevatedButton.styleFrom(backgroundColor: secondaryColor),
+                      onPressed: () {
+                        auth.login();
+                        // Navigator.push(
+                        //   context,
+                        //   CupertinoPageRoute(
+                        //     builder: (context) => const DashBoard(),
+                        //   ),
+                        // );
+                      },
+                      child: auth.isLoading
+                          ? const SizedBox(
+                              height: 30,
+                              width: 30,
+                              child: CircularProgressIndicator(
+                                color: Colors.black,
+                              ),
+                            )
+                          : Text(
+                              "Login",
+                              style: textStyles.normalTextStyleBold.copyWith(
+                                color: Colors.black,
+                              ),
+                            ),
+                    );
+                  }),
+                ),
                 const SizedBox(height: 30),
                 RichText(
                   text: TextSpan(
                     children: [
                       TextSpan(
-                        text: "Don't have an account? ",
-                        style: textStyles.normalTextStyle.copyWith(color: Colors.white)
-                      ),
+                          text: "Don't have an account? ",
+                          style: textStyles.normalTextStyle.copyWith(color: Colors.white)),
                       TextSpan(
                         recognizer: TapGestureRecognizer()
                           ..onTap = () {
@@ -106,7 +115,7 @@ class _LoginPageState extends State<LoginPage> {
                         text: "Register",
                         style: GoogleFonts.andika(
                           decoration: TextDecoration.underline,
-                          color: Colors.white,
+                          color: secondaryColor,
                           fontSize: 14,
                         ),
                       ),
